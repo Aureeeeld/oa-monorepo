@@ -1,0 +1,32 @@
+{
+  "name": "oa-monorepo",
+  "repository": "https://github.com/OwAssembly/oa-monorepo",
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">= 12.13.0",
+    "npm": ">= 6.12.0",
+    "yarn": ">= 1.17.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/shared/*"
+  ],
+  "scripts": {
+    "start": "lerna run start --stream",
+    "lint": "lerna run --concurrency 1 --stream lint",
+    "test": "lerna run --concurrency 1 --stream test",
+    "bootstrap": "yarn install --ignore-scripts",
+    "clean": "rimraf node_modules && lerna clean --yes"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run --concurrency 1 --stream precommit"
+    }
+  },
+  "devDependencies": {
+    "husky": "^3.0.9",
+    "lerna": "^3.18.3"
+  }
+}
