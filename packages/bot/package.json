@@ -1,0 +1,43 @@
+{
+  "name": "oa-bot",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">= 12.13.0",
+    "npm": ">= 6.12.0",
+    "yarn": ">= 1.17.0"
+  },
+  "scripts": {
+    "start": "nodemon --config nodemon.json",
+    "build": "tsc",
+    "lint": "eslint src/ --fix --ext .ts,.tsx .",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "pretty-quick --staged",
+      "yarn lint"
+    ]
+  },
+  "dependencies": {
+    "@typeit/discord": "^1.0.3",
+    "apollo-boost": "^0.4.4",
+    "body-parser": "^1.19.0",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.4",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.4.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.3",
+    "@types/node-fetch": "^2.5.3"
+  }
+}
