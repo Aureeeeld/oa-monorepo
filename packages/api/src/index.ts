@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { GraphQLServer } from "graphql-yoga";
+import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 
@@ -10,21 +10,22 @@ import "./lib/env";
 
 const port: number = parseInt(process.env.PORT!, 10);
 
+// * Bootstrap GraphQL Server & DB connection
 async function bootstrapServer() {
   const schema = await buildSchema({
     resolvers: [UserResolver],
     emitSchemaFile: false
   });
 
-  const server = new GraphQLServer({
+  const server = new ApolloServer({
     schema
   });
 
   createConnection()
     .then(() => {
-      server.start(() =>
-        console.log(`🚀 Server is running on http://localhost:${port}`)
-      );
+      server.listen(port).then(({ url }) => {
+        console.log(`🚀 Server ready at ${url}`);
+      });
     })
     .catch(e => {
       console.log("Couldn't connect to the database.");
@@ -32,4 +33,5 @@ async function bootstrapServer() {
     });
 }
 
+// * Start everything
 bootstrapServer();
