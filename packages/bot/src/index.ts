@@ -3,6 +3,11 @@ import "reflect-metadata";
 import { Discord, On, Client } from "@typeit/discord";
 import { Message } from "discord.js";
 
+// * Commands
+import { initCommandsArray } from "./utils/commandUtils";
+import { CommandInArray } from "./commands/types";
+import { commandsArray } from "./commands";
+
 // * Load environment variables
 import "./lib/env";
 
@@ -14,8 +19,6 @@ export default class DiscordApp {
   private static _client: Client;
 
   private _prefix = "!";
-
-  private _sayHelloMessage = "hello !";
 
   private _commandNotFoundMessage = "command not found...";
 
@@ -29,18 +32,18 @@ export default class DiscordApp {
     if (DiscordApp._client.user.id !== message.author.id) {
       if (message.content[0] === this._prefix) {
         const cmd = message.content.replace(this._prefix, "").toLowerCase();
-        switch (cmd) {
-          case "hello":
-            message.reply(this._sayHelloMessage);
-            break;
-          default:
-            message.reply(this._commandNotFoundMessage);
-            break;
-        }
+        const alias = cmd.split(" ")[0];
+
+        const commandFound = commandsArray.find(
+          (x: CommandInArray) => x.alias === alias
+        );
+
+        if (commandFound) commandFound.command.run(message);
       }
     }
   }
 }
 
 // * Start
+initCommandsArray();
 DiscordApp.start();
