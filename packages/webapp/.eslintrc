@@ -1,0 +1,18 @@
+{
+  "extends": ["airbnb-typescript-prettier", "prettier", "prettier/react"],
+  "plugins": ["react", "react-hooks", "prettier", "jest", "import", "jsx-a11y"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {},
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "FileReader": true,
+    "Blob": true,
+    "navigator": true
+  },
+  "env": {
+    "jest/globals": true
+  }
+}
