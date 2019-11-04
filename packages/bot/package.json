@@ -30,6 +30,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
+    "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.4",
     "recursive-readdir": "^2.2.2",
