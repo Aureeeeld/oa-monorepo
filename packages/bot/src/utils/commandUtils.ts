@@ -11,6 +11,7 @@ function isCommand(object: any): object is Command {
     "name" in object &&
     "aliases" in object &&
     "description" in object &&
+    "usage" in object &&
     "onlyStaff" in object &&
     "run" in object
   );
@@ -27,6 +28,13 @@ const importCommand = (command: Command) => {
 
     commandsArray.push(commandInArray);
   });
+
+  const commandInArray: CommandInArray = {
+    alias: command.name,
+    command
+  };
+
+  commandsArray.push(commandInArray);
 };
 
 const importCommandFromFile = (file: string) => {

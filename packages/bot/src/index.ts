@@ -11,20 +11,19 @@ import { commandsArray } from "./commands";
 // * Load environment variables
 import "./lib/env";
 
-const token: string = process.env.TOKEN!;
+const TOKEN: string = process.env.TOKEN!;
+const PREFIX: string = process.env.PREFIX!;
 
 // * Discord Bot
 @Discord
 export default class DiscordApp {
   private static _client: Client;
 
-  private _prefix = "!";
-
-  private _commandNotFoundMessage = "command not found...";
+  private _prefix = PREFIX;
 
   static start() {
     this._client = new Client();
-    this._client.login(token, `${__dirname}/*Discord.ts`);
+    this._client.login(TOKEN, `${__dirname}/*Discord.ts`);
   }
 
   @On("message")
