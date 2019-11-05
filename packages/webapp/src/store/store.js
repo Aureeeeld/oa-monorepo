@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import * as ducks from "./ducks";
 
 const logger = createLogger();
-const reducers = combineReducers(ducks); // ! Supposed to combine ducks
+const reducers = combineReducers(ducks);
 
 const store = createStore(
   reducers,

@@ -1,12 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
-import { backgroundColor, textColor } from "./theme";
-
 const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
   body {
-    background-color: ${backgroundColor};
     font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    color: ${textColor};
+    margin: 0;
+    font-size: .8125rem;
+    background: transparent
   }
 `;
 
