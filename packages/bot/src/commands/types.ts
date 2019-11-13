@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Message, User } from "discord.js";
 
 export interface Command {
   name: string;
@@ -12,4 +12,26 @@ export interface Command {
 export interface CommandInArray {
   alias: string;
   command: Command;
+}
+
+export interface GuildJoinRequest {
+  applicant: string;
+  limitDate: Date;
+  responseDate: Date | null;
+  response: boolean | null;
+}
+
+export interface GuildOA {
+  name: string;
+  master: string;
+  members: string[];
+  applicantsList: GuildJoinRequest[];
+  validatedByStaff: boolean | null;
+  valid: boolean;
+  money: number;
+}
+
+export interface GuildInArray {
+  alias: string;
+  guild: GuildOA;
 }

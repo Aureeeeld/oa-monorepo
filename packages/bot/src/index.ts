@@ -1,10 +1,10 @@
 // * Packages
 import "reflect-metadata";
 import { Discord, On, Client } from "@typeit/discord";
-import { Message } from "discord.js";
+import { Message, Role } from "discord.js";
 
 // * Commands
-import { initCommandsArray } from "./utils/commandUtils";
+import { init } from "./utils/commandUtils";
 import { CommandInArray } from "./commands/types";
 import { commandsArray } from "./commands";
 
@@ -30,6 +30,15 @@ export default class DiscordApp {
   async onMessage(message: Message) {
     if (DiscordApp._client.user.id !== message.author.id) {
       if (message.content[0] === this._prefix) {
+        // message.guild.channels.forEach(chan =>{
+        //   if(chan.name !== "général")
+        //     chan.delete();
+        // });
+        // message.guild.roles.forEach(chan =>{
+        //   if(!["Athéna2.0","Staff"].includes(chan.name) )
+        //     chan.delete();
+        // });
+
         const cmd = message.content.replace(this._prefix, "").toLowerCase();
         const alias = cmd.split(" ")[0];
 
@@ -44,5 +53,5 @@ export default class DiscordApp {
 }
 
 // * Start
-initCommandsArray();
+init();
 DiscordApp.start();
