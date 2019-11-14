@@ -28,7 +28,7 @@ const createChannel = (
   memberRole: Role,
   leaderRole: Role
 ) => {
-  server
+  return server
     .createChannel(guildName, {
       type: "category",
       permissionOverwrites: [
@@ -71,7 +71,7 @@ const createChannel = (
           }
         ]
       });
-      category.guild.createChannel("salle-commune", {
+      return category.guild.createChannel("salle-commune", {
         type: "text",
         parent: category.id
       });
@@ -79,15 +79,15 @@ const createChannel = (
     .catch(console.error);
 };
 
-const createChannelsAndRoles = (server: Guild, guild: GuildOA) => {
-  server
+const createChannelsAndRoles = (server: Guild, guild: GuildOA):Promise<any> => {
+  return server
     .createRole({
       name: guild.name,
       mentionable: true,
       position: 6
     })
     .then(memberRole => {
-      server
+      return server
         .createRole({
           name: `${guild.name}💎`,
           mentionable: true,
@@ -100,7 +100,7 @@ const createChannelsAndRoles = (server: Guild, guild: GuildOA) => {
           server.member(leaderId).addRole(leaderRole);
           server.member(leaderId).addRole(memberRole);
 
-          createChannel(server, guild.name, memberRole, leaderRole);
+          return createChannel(server, guild.name, memberRole, leaderRole);
         })
         .catch(console.error);
     })
@@ -142,29 +142,27 @@ const checkGuildValidation = async (server: Guild, guild: GuildOA) => {
       guild.valid &&
       guild.applicantsList.filter(x => !x.response).length === 0
     ) {
-      await createChannelsAndRoles(server, guild);
-      console.log(server.channels);
-      const chanQG = server.channels.find((chan: Channel) => {
-        console.log(chan instanceof TextChannel);
-        if (chan instanceof TextChannel) {
-          console.log(chan.parent);
-          console.log(chan.parentID);
-          if (chan.parent) console.log(chan.parent.name);
-          console.log(chan.name);
-        }
+      await createChannelsAndRoles(server, guild).then(x=>{
+        const chanQG = server.channels.find((chan: Channel) => {
+          return (
+            chan instanceof TextChannel &&
+            chan.parent &&
+            chan.parent.name === guild.name &&
+            chan.name === "quartier-general"
+          );
+        }) as TextChannel;
+        const guildTag:Role = server.roles.find("name", guild.name);
 
-        return (
-          chan instanceof TextChannel &&
-          chan.parent &&
-          chan.parent.name === guild.name &&
-          chan.name === "quartier-general"
+        guild.applicantsList.forEach((guildJoinRequest:GuildJoinRequest) =>{
+          server.members.find(x => x.user.tag === guildJoinRequest.applicant).addRole(guildTag);
+        });
+
+        chanQG.send(
+          `Félicitation à vous ! ${guildTag} est une guilde officielle !`
         );
-      }) as TextChannel;
-      const guildTag = server.roles.find("name", guild.name);
+      });
 
-      chanQG.send(
-        `Félicitation à vous ! ${guildTag} est une guilde officielle !`
-      );
+
 
       guildsSave.push({ alias: guild.name, guild });
     }
@@ -179,7 +177,6 @@ const getResponse = (
   member: User,
   server: Guild
 ) => {
-  // TODO - Refac, should add in commandUtils a function to add reacts
   const filter = (reaction: MessageReaction) =>
     [UnicodeReactMap.confirmReact, UnicodeReactMap.cancelReact].includes(
       reaction.emoji.name
