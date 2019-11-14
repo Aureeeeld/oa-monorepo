@@ -123,7 +123,7 @@ const sendGuildStaffValidation = (msg: Message, guild: GuildOA) => {
       .setTitle(`Refus à la création de la guilde ${guild.name}`);
   }
 
-  // saveGuildFile();
+   saveGuildFile();
   msg.channel.send(embed).then(msgSend => {
     if (guild.valid)
       msg.channel.send(
@@ -206,7 +206,7 @@ const getResponse = (
         member.send(`Dommage pour ${guild.name}!`);
         guildInvitation.response = false;
       }
-      // saveGuildFile();
+       saveGuildFile();
     })
     .catch(console.error);
 };

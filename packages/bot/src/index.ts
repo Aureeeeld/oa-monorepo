@@ -30,14 +30,6 @@ export default class DiscordApp {
   async onMessage(message: Message) {
     if (DiscordApp._client.user.id !== message.author.id) {
       if (message.content[0] === this._prefix) {
-        // message.guild.channels.forEach(chan =>{
-        //   if(chan.name !== "général")
-        //     chan.delete();
-        // });
-        // message.guild.roles.forEach(chan =>{
-        //   if(!["Athéna2.0","Staff"].includes(chan.name) )
-        //     chan.delete();
-        // });
 
         const cmd = message.content.replace(this._prefix, "").toLowerCase();
         const alias = cmd.split(" ")[0];
