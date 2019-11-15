@@ -26,28 +26,32 @@ const HelpCommand: Command = {
         (x: CommandInArray) => x.alias === x.command.name
       );
 
-      if (commands)
+      if (commands) {
         commands.forEach((param: CommandInArray) => {
           embed.addField(
             `${PREFIX}${param.alias} ${param.command.usage}`,
             param.command.description
           );
         });
+
+        message.channel.send(embed);
+      }
     } else {
       params.forEach((param: string) => {
         const commandFound = commandsArray.find(
           (x: CommandInArray) => x.alias === param
         );
 
-        if (commandFound)
+        if (commandFound) {
           embed.addField(
             `${PREFIX}${param} ${commandFound.command.usage}`,
             commandFound.command.description
           );
+
+          message.channel.send(embed);
+        }
       });
     }
-
-    message.channel.send(embed);
   }
 };
 
