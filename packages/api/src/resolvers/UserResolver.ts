@@ -1,7 +1,7 @@
 import { Authorized, Query, Mutation, Resolver, Arg } from "type-graphql";
 
-import { User } from "../entities/User";
-import UserSchema from "../schemas/UserSchema";
+import { User } from "../entities";
+import { UserSchema } from "../schemas";
 
 @Resolver(of => UserSchema)
 export default class {
@@ -12,10 +12,10 @@ export default class {
   }
 
   @Authorized()
-  @Mutation(returns => UserSchema)
-  async createUser(@Arg("name") name: string): Promise<User> {
-    const user = new User();
-    user.name = name;
-    return user.save();
+  @Query(returns => String)
+  async userAvatarLink(@Arg("id") id: string) {
+    const user = await User.findOne({ where: { discordId: id } });
+    if (!user) return undefined;
+    return `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`;
   }
 }

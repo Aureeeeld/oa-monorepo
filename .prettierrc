@@ -1,3 +1,4 @@
 {
-  "doubleQuote": true
+  "singleQuote": false,
+  "endOfLine": "lf"
 }

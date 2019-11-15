@@ -1,10 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @Entity()
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+export default class User extends BaseEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
-  name: string;
+  discordId: string;
+
+  @Column()
+  username: string;
+
+  @Column()
+  avatar: string;
 }

@@ -6,5 +6,11 @@ export default class UserSchema {
   id: number;
 
   @Field()
-  name: string;
+  username: string;
+
+  @Field()
+  avatar: string;
+
+  @Field()
+  discordId: string;
 }
