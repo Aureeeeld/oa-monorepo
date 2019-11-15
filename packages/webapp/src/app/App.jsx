@@ -1,24 +1,22 @@
+import { ApolloProvider } from "@apollo/react-hooks";
 import * as React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import { Normalize } from "styled-normalize";
 
-import { GlobalStyle } from "../shared";
+// * Semantic UI Theme
+import "semantic-ui-css/semantic.min.css";
+
+// * Apollo GraphQL Client
+import client from "../shared/graphql/client";
 
 import Pages from "../pages";
 import store from "../store";
 
 const App = () => (
-  <Provider store={store}>
-    <Normalize />
-    <ThemeProvider theme={{ mode: "light" }}>
-      <BrowserRouter>
-        <GlobalStyle />
-        <Pages />
-      </BrowserRouter>
-    </ThemeProvider>
-  </Provider>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <Pages />
+    </Provider>
+  </ApolloProvider>
 );
 
 export default App;
