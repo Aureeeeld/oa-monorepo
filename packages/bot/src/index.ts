@@ -30,7 +30,6 @@ export default class DiscordApp {
   async onMessage(message: Message) {
     if (DiscordApp._client.user.id !== message.author.id) {
       if (message.content[0] === this._prefix) {
-
         const cmd = message.content.replace(this._prefix, "").toLowerCase();
         const alias = cmd.split(" ")[0];
 

@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "applicantsList": [
+      {
+        "applicant": "Saiiga#2546",
+        "limitDate": "2019-11-17T12:53:55.699Z",
+        "response": true,
+        "responseDate": "2019-11-14T12:53:59.681Z"
+      }
+    ],
+    "master": "Saiiga#2546",
+    "members": ["Saiiga#2546", "Saiiga²#9018"],
+    "money": 0,
+    "name": "Test",
+    "valid": true,
+    "validatedByStaff": false
+  }
+]

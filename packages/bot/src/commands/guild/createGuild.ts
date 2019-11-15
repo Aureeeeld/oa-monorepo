@@ -79,7 +79,10 @@ const createChannel = (
     .catch(console.error);
 };
 
-const createChannelsAndRoles = (server: Guild, guild: GuildOA):Promise<any> => {
+const createChannelsAndRoles = (
+  server: Guild,
+  guild: GuildOA
+): Promise<any> => {
   return server
     .createRole({
       name: guild.name,
@@ -123,7 +126,7 @@ const sendGuildStaffValidation = (msg: Message, guild: GuildOA) => {
       .setTitle(`Refus à la création de la guilde ${guild.name}`);
   }
 
-   saveGuildFile();
+  saveGuildFile();
   msg.channel.send(embed).then(msgSend => {
     if (guild.valid)
       msg.channel.send(
@@ -142,7 +145,7 @@ const checkGuildValidation = async (server: Guild, guild: GuildOA) => {
       guild.valid &&
       guild.applicantsList.filter(x => !x.response).length === 0
     ) {
-      await createChannelsAndRoles(server, guild).then(x=>{
+      await createChannelsAndRoles(server, guild).then(x => {
         const chanQG = server.channels.find((chan: Channel) => {
           return (
             chan instanceof TextChannel &&
@@ -151,18 +154,18 @@ const checkGuildValidation = async (server: Guild, guild: GuildOA) => {
             chan.name === "quartier-general"
           );
         }) as TextChannel;
-        const guildTag:Role = server.roles.find("name", guild.name);
+        const guildTag: Role = server.roles.find("name", guild.name);
 
-        guild.applicantsList.forEach((guildJoinRequest:GuildJoinRequest) =>{
-          server.members.find(x => x.user.tag === guildJoinRequest.applicant).addRole(guildTag);
+        guild.applicantsList.forEach((guildJoinRequest: GuildJoinRequest) => {
+          server.members
+            .find(x => x.user.tag === guildJoinRequest.applicant)
+            .addRole(guildTag);
         });
 
         chanQG.send(
           `Félicitation à vous ! ${guildTag} est une guilde officielle !`
         );
       });
-
-
 
       guildsSave.push({ alias: guild.name, guild });
     }
@@ -206,7 +209,7 @@ const getResponse = (
         member.send(`Dommage pour ${guild.name}!`);
         guildInvitation.response = false;
       }
-       saveGuildFile();
+      saveGuildFile();
     })
     .catch(console.error);
 };
@@ -280,7 +283,7 @@ const sendRequests = (message: Message, guild: GuildOA) => {
   });
 };
 
-const createGuildCommand: Command = {
+const CreateGuildCommand: Command = {
   aliases: ["cg", "create_guild"],
   description:
     "Permet de créer une guilde et d'envoyer une demande aux membres",
@@ -389,4 +392,4 @@ const createGuildCommand: Command = {
   }
 };
 
-export default createGuildCommand;
+export default CreateGuildCommand;

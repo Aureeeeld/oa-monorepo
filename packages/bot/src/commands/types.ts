@@ -16,7 +16,7 @@ export interface CommandInArray {
 
 export interface GuildJoinRequest {
   applicant: string;
-  limitDate: Date;
+  limitDate: Date | null;
   responseDate: Date | null;
   response: boolean | null;
 }
