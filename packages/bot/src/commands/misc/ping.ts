@@ -4,7 +4,7 @@ import { Command } from "../types";
 
 const PingCommand: Command = {
   name: "ping",
-  aliases: [""],
+  aliases: [],
   usage: "",
   description: "Affiche le temps de réponse du bot",
   onlyStaff: false,
