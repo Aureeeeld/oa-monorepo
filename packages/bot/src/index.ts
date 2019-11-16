@@ -12,14 +12,14 @@ import { commandsArray } from "./commands";
 import "./lib/env";
 
 const TOKEN: string = process.env.TOKEN!;
-const PREFIX: string = process.env.PREFIX!;
+const COMMAND_PREFIX: string = process.env.COMMAND_PREFIX!;
 
 // * Discord Bot
 @Discord
 export default class DiscordApp {
   private static _client: Client;
 
-  private _prefix = PREFIX;
+  private _prefix = COMMAND_PREFIX;
 
   static start() {
     this._client = new Client();

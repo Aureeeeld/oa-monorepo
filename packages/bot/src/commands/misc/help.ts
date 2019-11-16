@@ -5,7 +5,7 @@ import { commandsArray } from "../index";
 // * Load environment variables
 import "../../lib/env";
 
-const PREFIX: string = process.env.PREFIX!;
+const COMMAND_PREFIX: string = process.env.COMMAND_PREFIX!;
 
 const HelpCommand: Command = {
   name: "help",
@@ -29,7 +29,7 @@ const HelpCommand: Command = {
       if (commands) {
         commands.forEach((param: CommandInArray) => {
           embed.addField(
-            `${PREFIX}${param.alias} ${param.command.usage}`,
+            `${COMMAND_PREFIX}${param.alias} ${param.command.usage}`,
             param.command.description
           );
         });
@@ -44,7 +44,7 @@ const HelpCommand: Command = {
 
         if (commandFound) {
           embed.addField(
-            `${PREFIX}${param} ${commandFound.command.usage}`,
+            `${COMMAND_PREFIX}${param} ${commandFound.command.usage}`,
             commandFound.command.description
           );
 
