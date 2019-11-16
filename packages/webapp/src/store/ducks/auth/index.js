@@ -1,13 +1,13 @@
 import { openLoginPopup } from "./loginUtils";
 
 // * Actions
-const LOGIN_PENDING = "LOGIN_PENDING";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGIN_FAILED = "LOGIN_FAILED";
-const LOGOUT = "LOGOUT";
-const INIT_POPUP = "INIT_POPUP";
-const CLOSE_POPUP = "CLOSE_POPUP";
-const SET_DISCORD_ID = "SET_DISCORD_ID";
+const LOGIN_PENDING = "auth/LOGIN_PENDING";
+const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS";
+const LOGIN_FAILED = "auth/LOGIN_FAILED";
+const LOGOUT = "auth/LOGOUT";
+const INIT_POPUP = "auth/INIT_POPUP";
+const CLOSE_POPUP = "auth/CLOSE_POPUP";
+const SET_DISCORD_ID = "auth/SET_DISCORD_ID";
 
 // * Default state
 const DEFAULT_STATE = {
@@ -27,7 +27,12 @@ const loginReducer = (state = DEFAULT_STATE, action = {}) => {
     case LOGIN_FAILED:
       return { ...state, isPending: false, error: action.payload };
     case LOGOUT:
-      return { ...state, isLoggedIn: false };
+      return {
+        ...state,
+        isLoggedIn: false,
+        isPending: false,
+        discordId: undefined
+      };
     case INIT_POPUP:
       return { ...state, loginPopup: action.payload };
     case CLOSE_POPUP:

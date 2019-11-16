@@ -1,5 +1,5 @@
 // * Actions
-const CHANGE_THEME_MODE = "CHANGE_THEME_MODE";
+const CHANGE_THEME_MODE = "theme/CHANGE_MODE";
 
 // * Default state
 const DEFAULT_STATE = {
