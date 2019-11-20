@@ -22,6 +22,31 @@ import { guildsSave } from "../index";
 const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
 
+const beInGuild = (message: Message, embed: RichEmbed): boolean => {
+  let double = false;
+  let listPlayer = "";
+
+  message.mentions.users.forEach((user: User) => {
+    guildsSave.forEach(guildInArray => {
+      if (guildInArray.guild.members.includes(user.tag)) {
+        double = true;
+        listPlayer +=
+          " - " +
+          user.tag +
+          " est déjà dans la guilde : " +
+          guildInArray.guild.name +
+          "\n";
+      }
+    });
+  });
+
+  if (double) {
+    embed.addField("Mauvaise nouvelle :/ ", listPlayer);
+  }
+
+  return double;
+};
+
 const createChannel = (
   server: Guild,
   guildName: string,
@@ -337,6 +362,15 @@ const CreateGuildCommand: Command = {
             "Vous êtes arrivé depuis trop peu de temp!",
             "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
           );
+      } else if (message.mentions.users.size < 5) {
+        embed
+          .setColor("RED")
+          .addField(
+            "Nah, c'est de la triche ça !",
+            "Tu pensais que je n'avais pas vu le multi tag <:mccree:453138086919143424> ?"
+          );
+      } else if (beInGuild(message, embed)) {
+        embed.setColor("RED");
       } else if (!guildsSave.find((x: GuildInArray) => x.alias === guildName)) {
         guild = {
           applicantsList: [],
