@@ -22,6 +22,15 @@ import { guildsSave } from "../index";
 const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
 
+const addUpdateGuild = (guild : GuildOA)=>{
+  let guildFind =guildsSave.find(x=>x.alias === guild.name);
+  if(guildFind){
+    guildFind.guild = guild;
+  }else{
+    guildsSave.push({alias : guild.name, guild});
+  }
+};
+
 const beInGuild = (message: Message, embed: RichEmbed): boolean => {
   let double = false;
   let listPlayer = "";
@@ -30,12 +39,7 @@ const beInGuild = (message: Message, embed: RichEmbed): boolean => {
     guildsSave.forEach(guildInArray => {
       if (guildInArray.guild.members.includes(user.tag)) {
         double = true;
-        listPlayer +=
-          " - " +
-          user.tag +
-          " est déjà dans la guilde : " +
-          guildInArray.guild.name +
-          "\n";
+        listPlayer += ` - ${user.tag} est déjà dans la guilde : ${guildInArray.guild.name}\n`;
       }
     });
   });
@@ -141,34 +145,42 @@ const sendGuildStaffValidation = (msg: Message, guild: GuildOA) => {
   const leader = msg.guild.members.find(
     member => member.user.tag === guild.master
   );
-  if (guild.valid) {
-    embed.setColor("GREEN").setTitle(`Création de la guilde ${guild.name}`);
 
-    checkGuildValidation(msg.guild, guild);
-  } else {
-    embed
-      .setColor("RED")
-      .setTitle(`Refus à la création de la guilde ${guild.name}`);
-  }
+  checkGuildValidation(msg.guild,guild).then(
+    x=>
+    {
+      if (guild.validatedByStaff) {
+        embed.setColor("GREEN").setTitle(`Création de la guilde ${guild.name}`);
 
-  saveGuildFile();
-  msg.channel.send(embed).then(msgSend => {
-    if (guild.valid)
-      msg.channel.send(
-        `Félicitation ${leader} !Les membres du staff ont validé la création de ${guild.name}. Maintenant il faut que tout les membres aient rejoins !`
-      );
-    else
-      msg.channel.send(
-        `Dommage ${leader} :/ Le staff a refusé la création de ${guild.name} tu devrais voir avec eux`
-      );
-  });
+      } else {
+        embed
+          .setColor("RED")
+          .setTitle(`Refus à la création de la guilde ${guild.name}`);
+      }
+
+      saveGuildFile();
+      msg.channel.send(embed).then(msgSend => {
+        if (guild.validatedByStaff)
+          msg.channel.send(
+            `Félicitation ${leader} !Les membres du staff ont validé la création de ${guild.name}. Maintenant il faut que tout les membres aient rejoins !`
+          );
+        else
+          msg.channel.send(
+            `Dommage ${leader} :/ Le staff a refusé la création de ${guild.name} tu devrais voir avec eux`
+          );
+      });
+    }
+  ).catch(console.error);
+
+
 };
 
 const checkGuildValidation = async (server: Guild, guild: GuildOA) => {
   try {
     if (
-      guild.valid &&
-      guild.applicantsList.filter(x => !x.response).length === 0
+      guild.validatedByStaff &&
+      guild.applicantsList.filter(x => !x.response).length === 0 &&
+      !guild.valid
     ) {
       await createChannelsAndRoles(server, guild).then(x => {
         const chanQG = server.channels.find((chan: Channel) => {
@@ -192,7 +204,7 @@ const checkGuildValidation = async (server: Guild, guild: GuildOA) => {
         );
       });
 
-      guildsSave.push({ alias: guild.name, guild });
+      addUpdateGuild(guild);
     }
   } catch (e) {
     console.error(e);
@@ -229,12 +241,14 @@ const getResponse = (
         guildInvitation.response = true;
         guild.members.push(member.tag);
 
-        checkGuildValidation(server, guild);
       } else {
         member.send(`Dommage pour ${guild.name}!`);
         guildInvitation.response = false;
       }
-      saveGuildFile();
+
+      checkGuildValidation(server, guild).then(saveGuildFile);
+
+
     })
     .catch(console.error);
 };
@@ -262,7 +276,9 @@ const getStaffConfirmation = (msg: Message, guild: GuildOA) => {
       const awnser = collected.find("count", 2).emoji.name;
       msg.reactions.forEach((react: MessageReaction) => react.remove());
 
-      guild.valid = awnser === UnicodeReactMap.confirmReact;
+      guild.validatedByStaff = awnser === UnicodeReactMap.confirmReact;
+
+      addUpdateGuild(guild);
 
       sendGuildStaffValidation(msg, guild);
     })
@@ -362,14 +378,16 @@ const CreateGuildCommand: Command = {
             "Vous êtes arrivé depuis trop peu de temp!",
             "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
           );
-      } else if (message.mentions.users.size < 5) {
-        embed
-          .setColor("RED")
-          .addField(
-            "Nah, c'est de la triche ça !",
-            "Tu pensais que je n'avais pas vu le multi tag <:mccree:453138086919143424> ?"
-          );
-      } else if (beInGuild(message, embed)) {
+      }
+      // else if (message.mentions.users.size < 5) {
+      //   embed
+      //     .setColor("RED")
+      //     .addField(
+      //       "Nah, c'est de la triche ça !",
+      //       "Tu pensais que je n'avais pas vu le multi tag <:mccree:453138086919143424> ?"
+      //     );
+      // }
+      else if (beInGuild(message, embed)) {
         embed.setColor("RED");
       } else if (!guildsSave.find((x: GuildInArray) => x.alias === guildName)) {
         guild = {
