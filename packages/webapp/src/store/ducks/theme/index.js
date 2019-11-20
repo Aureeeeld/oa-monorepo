@@ -1,5 +1,5 @@
 // * Actions
-const CHANGE_THEME_MODE = "theme/CHANGE_MODE";
+const SWAP_THEME_MODE = "theme/SWAP_THEME_MODE";
 
 // * Default state
 const DEFAULT_STATE = {
@@ -9,8 +9,10 @@ const DEFAULT_STATE = {
 // * Reducer
 const themeReducer = (state = DEFAULT_STATE, action = {}) => {
   switch (action.type) {
-    case CHANGE_THEME_MODE:
-      return { ...state, mode: action.payload };
+    case SWAP_THEME_MODE:
+      return state.mode === "light"
+        ? { ...state, mode: "dark" }
+        : { ...state, mode: "light" };
     default:
       return state;
   }
@@ -19,7 +21,6 @@ const themeReducer = (state = DEFAULT_STATE, action = {}) => {
 export default themeReducer;
 
 // * Action creators
-export const setThemeMode = text => ({
-  type: CHANGE_THEME_MODE,
-  payload: text
+export const swapThemeMode = () => ({
+  type: SWAP_THEME_MODE
 });

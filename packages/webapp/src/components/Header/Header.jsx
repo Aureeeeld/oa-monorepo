@@ -1,48 +1,33 @@
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Dropdown, Icon, Image, Menu } from "semantic-ui-react";
+import { Button, Icon, Image, Menu } from "semantic-ui-react";
 import io from "socket.io-client";
+
+// * Other components
+import LoggedInMenu from "../LoggedInMenu";
 
 // * Assets
 import logoDark from "../../assets/images/logo_dark.png";
 import logoLight from "../../assets/images/logo_light.png";
 
 // * Store
-import { login, logout, closeAuth } from "../../store/ducks/auth";
+import { login, closeAuth } from "../../store/ducks/auth";
 
 // * Styled components
-import { AvatarStyle, NotifIconStyle, StyledLink, Title } from "./styled";
+import { MenuWrapper, StyledLink, Title } from "./styled";
 
 // * Socket
 const socket = io(process.env.REACT_APP_API_ENDPOINT);
 
-// * Query
-const GET_USER_AVATAR_LINK = gql`
-  query Avatar($discordId: String!) {
-    userAvatarLink(id: $discordId)
-  }
-`;
-
-// * Components
-let Avatar = <AvatarStyle size="mini" avatar />;
-
-const NotifIcon = <NotifIconStyle name="bell" size="large" />;
-
+// * Component
 const Header = () => {
-  // * Dipatch
+  // * Dispatch
   const dispatch = useDispatch();
 
   // * Selectors
   const mode = useSelector(({ theme }) => theme.mode);
   const isLoggedIn = useSelector(({ auth }) => auth.isLoggedIn);
-  const discordId = useSelector(({ auth }) => auth.discordId);
-
-  const { data } = useQuery(GET_USER_AVATAR_LINK, { variables: { discordId } });
-  if (data)
-    Avatar = <AvatarStyle size="mini" src={data.userAvatarLink} avatar />;
 
   // * Effect
   useEffect(() => {
@@ -52,7 +37,7 @@ const Header = () => {
   }, []);
 
   return (
-    <Menu fixed="top" borderless inverted={mode === "dark"} size="large">
+    <MenuWrapper fixed="top" borderless size="large">
       <Menu.Item>
         <Link to="/">
           <Image
@@ -68,39 +53,14 @@ const Header = () => {
 
       <Menu.Item position="right">
         {isLoggedIn ? (
-          <>
-            <Dropdown
-              trigger={NotifIcon}
-              direction="left"
-              pointing="top"
-              icon={null}
-            >
-              <Dropdown.Menu>
-                <Dropdown.Item>Notification</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-
-            <Dropdown
-              trigger={Avatar}
-              direction="left"
-              pointing="top"
-              icon={null}
-            >
-              <Dropdown.Menu>
-                <Dropdown.Item
-                  icon="log out"
-                  text="Se déconnecter"
-                  onClick={() => dispatch(logout())}
-                />
-              </Dropdown.Menu>
-            </Dropdown>
-          </>
+          <LoggedInMenu />
         ) : (
           <>
             <Button
               icon
               labelPosition="right"
               onClick={() => dispatch(login(socket))}
+              color={mode === "dark" ? "grey" : ""}
             >
               Connexion
               <Icon name="discord" />
@@ -108,7 +68,7 @@ const Header = () => {
           </>
         )}
       </Menu.Item>
-    </Menu>
+    </MenuWrapper>
   );
 };
 
