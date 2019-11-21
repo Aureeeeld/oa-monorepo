@@ -21,14 +21,18 @@ import {
 } from "./styled";
 
 // * Query
-const GET_USER_AVATAR_LINK = gql`
+const GET_USER_PROFILE_INFORMATION = gql`
   query Avatar($discordId: String!) {
-    userAvatarLink(id: $discordId)
+    userProfileInformation(id: $discordId) {
+      username
+      avatar
+    }
   }
 `;
 
 // * Components
-let Avatar = <AvatarStyle size="mini" avatar />;
+// let Avatar = <AvatarStyle size="mini" avatar />;
+let Avatar = <AvatarStyle />;
 
 const ProfileMenu = () => {
   // * Dispatch
@@ -37,9 +41,15 @@ const ProfileMenu = () => {
   // * Selectors
   const discordId = useSelector(({ auth }) => auth.discordId);
 
-  const { data } = useQuery(GET_USER_AVATAR_LINK, { variables: { discordId } });
-  if (data)
-    Avatar = <AvatarStyle size="mini" src={data.userAvatarLink} avatar />;
+  const { data } = useQuery(GET_USER_PROFILE_INFORMATION, {
+    variables: { discordId }
+  });
+
+  if (data) {
+    const { avatar, username } = data.userProfileInformation;
+    if (avatar) Avatar = <AvatarStyle src={avatar} round size="45" />;
+    else Avatar = <AvatarStyle name={username} round size="45" />;
+  }
 
   return (
     <Dropdown trigger={Avatar} direction="left" pointing="top" icon={null}>

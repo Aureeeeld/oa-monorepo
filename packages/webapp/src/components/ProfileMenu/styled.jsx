@@ -1,5 +1,6 @@
+import Avatar from "react-avatar";
 import styled from "styled-components";
-import { Dropdown, Icon, Image } from "semantic-ui-react";
+import { Dropdown, Icon } from "semantic-ui-react";
 import tw from "tailwind.macro";
 
 // * Theme
@@ -12,13 +13,15 @@ const {
   textColor
 } = theme;
 
-export const AvatarStyle = styled(Image)`
-  ${tw`mx-4`}
+export const AvatarStyle = styled(Avatar)`
+  ${tw`mx-2`}
 
   &:hover,
   &:focus {
-    box-shadow: ${backgroundColor} 0px 0px 0px 4px;
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    img {
+      box-shadow: ${backgroundColor} 0px 0px 0px 4px;
+      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
   }
 `;
 
