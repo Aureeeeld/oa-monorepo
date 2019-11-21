@@ -4,7 +4,9 @@ import {
   Column,
   BaseEntity,
   OneToOne,
-  JoinColumn
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 
 import User from "./User";
@@ -23,4 +25,10 @@ export default class UserToken extends BaseEntity {
   @OneToOne(type => User)
   @JoinColumn()
   user: User;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn({ type: "timestamp" })
+  updatedAt: number;
 }

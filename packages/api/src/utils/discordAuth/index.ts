@@ -7,11 +7,12 @@ export const saveUserInDB = async (
   refreshToken: string,
   profile: Profile
 ) => {
+  console.log(profile);
   const { id, avatar, username } = profile;
 
   // ? User
   // * Get User
-  let user: User | undefined = await User.findOne({ where: { userId: id } });
+  let user: User | undefined = await User.findOne({ where: { discordId: id } });
   // * If it's not already in the db, create it
   if (!user) {
     user = new User();
