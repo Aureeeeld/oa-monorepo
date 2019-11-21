@@ -8,7 +8,7 @@ import { Dimmer, Loader } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
 // * Apollo GraphQL Client
-import client from "../shared/graphql/client";
+import client from "../shared/graphql";
 
 import Pages from "../pages";
 import { store, persistor } from "../store";

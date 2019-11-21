@@ -22,7 +22,7 @@ import {
 
 // * Query
 const GET_USER_PROFILE_INFORMATION = gql`
-  query Avatar($discordId: String!) {
+  query UserProfileInformation($discordId: String!) {
     userProfileInformation(id: $discordId) {
       username
       avatar
@@ -31,8 +31,7 @@ const GET_USER_PROFILE_INFORMATION = gql`
 `;
 
 // * Components
-// let Avatar = <AvatarStyle size="mini" avatar />;
-let Avatar = <AvatarStyle />;
+let Avatar = <AvatarStyle round size="45" color="white" />;
 
 const ProfileMenu = () => {
   // * Dispatch
