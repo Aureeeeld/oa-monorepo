@@ -26,7 +26,7 @@ export default class {
     const profile: UserProfileInformationSchema = {
       username,
       avatar: avatar
-        ? `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`
+        ? `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png?size=64`
         : avatar
     };
 

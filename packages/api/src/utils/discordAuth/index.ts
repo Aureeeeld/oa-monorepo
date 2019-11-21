@@ -7,7 +7,6 @@ export const saveUserInDB = async (
   refreshToken: string,
   profile: Profile
 ) => {
-  console.log(profile);
   const { id, avatar, username } = profile;
 
   // ? User
