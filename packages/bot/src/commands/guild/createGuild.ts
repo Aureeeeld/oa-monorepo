@@ -22,12 +22,12 @@ import { guildsSave } from "../index";
 const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
 
-const addUpdateGuild = (guild : GuildOA)=>{
-  let guildFind =guildsSave.find(x=>x.alias === guild.name);
-  if(guildFind){
+const addUpdateGuild = (guild: GuildOA) => {
+  const guildFind = guildsSave.find(x => x.alias === guild.name);
+  if (guildFind) {
     guildFind.guild = guild;
-  }else{
-    guildsSave.push({alias : guild.name, guild});
+  } else {
+    guildsSave.push({ alias: guild.name, guild });
   }
 };
 
@@ -146,12 +146,10 @@ const sendGuildStaffValidation = (msg: Message, guild: GuildOA) => {
     member => member.user.tag === guild.master
   );
 
-  checkGuildValidation(msg.guild,guild).then(
-    x=>
-    {
+  checkGuildValidation(msg.guild, guild)
+    .then(x => {
       if (guild.validatedByStaff) {
         embed.setColor("GREEN").setTitle(`Création de la guilde ${guild.name}`);
-
       } else {
         embed
           .setColor("RED")
@@ -169,10 +167,8 @@ const sendGuildStaffValidation = (msg: Message, guild: GuildOA) => {
             `Dommage ${leader} :/ Le staff a refusé la création de ${guild.name} tu devrais voir avec eux`
           );
       });
-    }
-  ).catch(console.error);
-
-
+    })
+    .catch(console.error);
 };
 
 const checkGuildValidation = async (server: Guild, guild: GuildOA) => {
@@ -240,15 +236,12 @@ const getResponse = (
         );
         guildInvitation.response = true;
         guild.members.push(member.tag);
-
       } else {
         member.send(`Dommage pour ${guild.name}!`);
         guildInvitation.response = false;
       }
 
       checkGuildValidation(server, guild).then(saveGuildFile);
-
-
     })
     .catch(console.error);
 };
@@ -378,16 +371,14 @@ const CreateGuildCommand: Command = {
             "Vous êtes arrivé depuis trop peu de temp!",
             "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
           );
-      }
-      // else if (message.mentions.users.size < 5) {
-      //   embed
-      //     .setColor("RED")
-      //     .addField(
-      //       "Nah, c'est de la triche ça !",
-      //       "Tu pensais que je n'avais pas vu le multi tag <:mccree:453138086919143424> ?"
-      //     );
-      // }
-      else if (beInGuild(message, embed)) {
+      } else if (message.mentions.users.size < 5) {
+        embed
+          .setColor("RED")
+          .addField(
+            "Nah, c'est de la triche ça !",
+            "Tu pensais que je n'avais pas vu le multi tag <:mccree:453138086919143424> ?"
+          );
+      } else if (beInGuild(message, embed)) {
         embed.setColor("RED");
       } else if (!guildsSave.find((x: GuildInArray) => x.alias === guildName)) {
         guild = {
