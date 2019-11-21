@@ -1,17 +1,15 @@
-import theme, { setThemeMode } from "./index";
+import theme, { swapThemeMode } from "./index";
 
 const DEFAULT_STATE = {
   mode: "light"
 };
 
 describe("Theme store action", () => {
-  it("should create CHANGE_THEME_MODE", () => {
-    const text = "dark";
+  it("should create SWAP_THEME_MODE", () => {
     const expectedAction = {
-      type: "CHANGE_THEME_MODE",
-      payload: text
+      type: "theme/SWAP_THEME_MODE"
     };
-    expect(setThemeMode(text)).toEqual(expectedAction);
+    expect(swapThemeMode()).toEqual(expectedAction);
   });
 });
 
@@ -20,15 +18,13 @@ describe("Theme store reducer", () => {
     expect(theme(undefined, {})).toEqual(DEFAULT_STATE);
   });
 
-  it("should handle CHANGE_THEME_MODE", () => {
-    const text = "dark";
+  it("should handle SWAP_THEME_MODE", () => {
     expect(
       theme(DEFAULT_STATE, {
-        type: "CHANGE_THEME_MODE",
-        payload: text
+        type: "theme/SWAP_THEME_MODE"
       })
     ).toEqual({
-      mode: text
+      mode: "dark"
     });
   });
 });
