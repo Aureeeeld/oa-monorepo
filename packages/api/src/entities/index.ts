@@ -1,2 +1,2 @@
-export { default as User } from "./User";
-export { default as UserToken } from "./UserToken";
+export { default as User } from "./User/User";
+export { default as UserToken } from "./User/UserToken";

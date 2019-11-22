@@ -2,10 +2,10 @@ import { UserInputError, ApolloError } from "apollo-server-express";
 import { Authorized, Query, Mutation, Resolver, Arg } from "type-graphql";
 
 // * Entities
-import { User } from "../entities";
+import { User } from "../../entities";
 
 // * Schemas
-import { UserSchema, UserProfileInformationSchema } from "../schemas";
+import { UserSchema, UserProfileInformationSchema } from "../../schemas";
 
 // * Resolvers
 @Resolver(of => UserSchema)

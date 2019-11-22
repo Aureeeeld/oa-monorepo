@@ -1,4 +1,4 @@
-export { default as UserSchema } from "./UserSchema";
+export { default as UserSchema } from "./User/UserSchema";
 export {
   default as UserProfileInformationSchema
-} from "./UserProfileInformationSchema";
+} from "./User/UserProfileInformationSchema";

@@ -2,11 +2,11 @@ import express from "express";
 import passport from "passport";
 import DiscordStrategy from "passport-discord";
 
-import { saveUserInDB } from "../utils/discordAuth";
-import { getSocket } from "../utils/discordAuth/socket";
+import { saveUserInDB } from "../../utils/auth/discord";
+import { getSocket } from "../../utils/socket";
 
 // * Load environment variables
-import "../lib/env";
+import "../../lib/env";
 
 const CLIENT_ID: string = process.env.CLIENT_ID!;
 const CLIENT_SECRET: string = process.env.CLIENT_SECRET!;

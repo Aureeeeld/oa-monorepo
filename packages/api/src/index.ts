@@ -11,11 +11,11 @@ import { createConnection } from "typeorm";
 import { UserResolver } from "./resolvers";
 
 // * Routes
-import discordRouter from "./routes/discord-auth";
+import discordRouter from "./routes/auth/discord";
 import indexRouter from "./routes/index";
 
 // * Utils
-import { initSocket } from "./utils/discordAuth/socket";
+import { initSocket } from "./utils/socket";
 
 // * Load environment variables
 import "./lib/env";
