@@ -1,5 +1,5 @@
-import { UserInputError, ApolloError } from "apollo-server-express";
-import { Authorized, Query, Mutation, Resolver, Arg } from "type-graphql";
+import { UserInputError } from "apollo-server-express";
+import { Authorized, Query, Resolver, Arg } from "type-graphql";
 
 // * Entities
 import { User } from "../../entities";

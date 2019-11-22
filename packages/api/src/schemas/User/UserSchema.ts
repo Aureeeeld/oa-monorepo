@@ -8,7 +8,7 @@ export default class UserSchema {
   @Field()
   username: string;
 
-  @Field()
+  @Field({ nullable: true })
   avatar: string;
 
   @Field()
