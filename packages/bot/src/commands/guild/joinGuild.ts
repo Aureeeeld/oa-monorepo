@@ -95,6 +95,10 @@ const sendMasterRequest = (
   });
 };
 
+const beInGuild = (server: Guild, userTag: string): boolean => {
+  return server.members.find(member => member.user.tag === userTag) !== null;
+};
+
 const JoinGuildCommand: Command = {
   aliases: ["jg"],
   description:
@@ -109,7 +113,14 @@ const JoinGuildCommand: Command = {
 
     const params: Array<string> = message.content.trim().split(", ");
 
-    if (params.length === 2) {
+    if (beInGuild(message.guild, message.author.tag)) {
+      embed
+        .setColor("RED")
+        .addField(
+          "*Tousse* !",
+          "J'ai vraiment besoin de le dire ?\nTu ne peut pas rejoindre deux guilde !"
+        );
+    } else if (params.length === 2) {
       const guildName: string = params
         .shift()!
         .split(" ")
