@@ -19,7 +19,7 @@ import { Command, GuildOA, GuildInArray, GuildJoinRequest } from "../types";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
 import { guildsSave } from "../index";
 
-const minSeniority: number = moment().diff(moment().subtract("1", "d"));
+// const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
 
 const addUpdateGuild = (guild: GuildOA) => {
@@ -364,14 +364,16 @@ const CreateGuildCommand: Command = {
             "Veuillez vérifier vos paramètres, une erreur est si vite arrivée",
             this.usage
           );
-      } else if (moment().diff(message.member.joinedAt) < minSeniority) {
-        embed
-          .setColor("RED")
-          .addField(
-            "Vous êtes arrivé depuis trop peu de temp!",
-            "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
-          );
-      } else if (message.mentions.users.size < 5) {
+      }
+      // else if (moment().diff(message.member.joinedAt) < minSeniority) {
+      //   embed
+      //     .setColor("RED")
+      //     .addField(
+      //       "Vous êtes arrivé depuis trop peu de temp!",
+      //       "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
+      //     );
+      // }
+      else if (message.mentions.users.size < 5) {
         embed
           .setColor("RED")
           .addField(
