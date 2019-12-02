@@ -103,7 +103,7 @@ const JoinGuildCommand: Command = {
   aliases: ["jg"],
   description:
     "Permet de rejoindre une guilde et d'envoyer une demande au chef.fe",
-  name: "join_guild",
+  name: "joinGuild",
   onlyStaff: false,
   usage: "nom de guilde, message de présentation",
   run: (message: Message) => {
