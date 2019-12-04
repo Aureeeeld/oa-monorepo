@@ -73,6 +73,10 @@ const createChannel = (
   memberRole: Role,
   leaderRole: Role
 ) => {
+  const staffRole = server.roles.find(
+    role => role.name === roleShouldCheckGuild
+  );
+
   return server
     .createChannel(guildName, {
       type: "category",
@@ -81,6 +85,10 @@ const createChannel = (
           id: memberRole.id,
           allow: [Permissions.DEFAULT, Permissions.FLAGS.ADD_REACTIONS!],
           deny: [Permissions.FLAGS.MANAGE_MESSAGES!]
+        },
+        {
+          id:staffRole.id,
+          allow:[Permissions.FLAGS.VIEW_CHANNEL!]
         },
         {
           id: leaderRole.id,
