@@ -88,7 +88,7 @@ const createChannel = (
         },
         {
           id:staffRole.id,
-          allow:[Permissions.FLAGS.VIEW_CHANNEL!]
+          allow:[Permissions.FLAGS.VIEW_CHANNEL!, Permissions.FLAGS.SEND_MESSAGES!,Permissions.FLAGS.READ_MESSAGES!, Permissions.FLAGS.MANAGE_MESSAGES!]
         },
         {
           id: leaderRole.id,
