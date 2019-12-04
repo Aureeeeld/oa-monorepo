@@ -19,7 +19,7 @@ import { Command, GuildOA, GuildInArray, GuildJoinRequest } from "../types";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
 import { guildsSave } from "../index";
 
-export const maxMembersInGuild:Number = 18;
+export const maxMembersInGuild:Number = 20;
 
 
 // const minSeniority: number = moment().diff(moment().subtract("1", "d"));
