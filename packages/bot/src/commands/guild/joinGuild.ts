@@ -96,8 +96,8 @@ const sendMasterRequest = (
   });
 };
 
-const beInGuild = (server: Guild, userTag: string): boolean => {
-  return server.members.find(member => member.user.tag === userTag) !== null;
+const beInGuild = (userTag: string): boolean => {
+  return guildsSave.some(member => member.guild.members.includes(userTag));
 };
 
 const JoinGuildCommand: Command = {
@@ -114,7 +114,7 @@ const JoinGuildCommand: Command = {
 
     const params: Array<string> = message.content.trim().split(", ");
 
-    if (beInGuild(message.guild, message.author.tag)) {
+    if (beInGuild(message.author.tag)) {
       embed
         .setColor("RED")
         .addField(
