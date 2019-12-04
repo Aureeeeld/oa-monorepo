@@ -33,6 +33,8 @@ export default class DiscordApp {
         const cmd = message.content.replace(this._prefix, "").toLowerCase();
         const alias = cmd.split(" ")[0];
 
+
+
         const commandFound = commandsArray.find(
           (x: CommandInArray) => x.alias === alias
         );

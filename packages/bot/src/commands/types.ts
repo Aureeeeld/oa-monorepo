@@ -27,7 +27,7 @@ export interface GuildOA {
   members: string[];
   applicantsList: GuildJoinRequest[];
   validatedByStaff: boolean | null;
-  valid: boolean;
+  valid: boolean | null;
   money: number;
 }
 
