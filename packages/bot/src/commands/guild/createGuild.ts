@@ -96,7 +96,7 @@ const createChannel = (
         },
         {
           id: server.id,
-          deny: [Permissions.ALL]
+          deny: [Permissions.FLAGS.VIEW_CHANNEL!]
         }
       ]
     })
