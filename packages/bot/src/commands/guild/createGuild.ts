@@ -19,6 +19,9 @@ import { Command, GuildOA, GuildInArray, GuildJoinRequest } from "../types";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
 import { guildsSave } from "../index";
 
+export const maxMembersInGuild:Number = 18;
+
+
 // const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
 const nameAlreadyClaim: Array<string> = [];
@@ -453,7 +456,15 @@ const CreateGuildCommand: Command = {
             "Nah, c'est de la triche ça !",
             "Tu pensais que je n'avais pas vu le multi tag <:mccree:453138086919143424> ?"
           );
-      } else if (guildsSave.find((x: GuildInArray) => x.alias === guildName) || nameAlreadyClaim.some(value => value.toLowerCase() === guildName.toLowerCase())) {
+      }
+      else if(message.mentions.users.size > maxMembersInGuild){
+        embed
+          .setColor("RED")
+          .addField(
+            "Trop de membre !",
+            `Une guilde ne peut posséder que ${maxMembersInGuild} membres, or tu en invite ${message.mentions.users.size} !`
+          );
+      }else if (guildsSave.find((x: GuildInArray) => x.alias === guildName) || nameAlreadyClaim.some(value => value.toLowerCase() === guildName.toLowerCase())) {
         embed.setColor("RED").addField(
           "C'est dommage !",
           `Quelqu'un a déjà eu l'idée de ce nom !

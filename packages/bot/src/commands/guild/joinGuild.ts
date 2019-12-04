@@ -12,6 +12,7 @@ import moment from "moment";
 import { Command, GuildInArray, GuildJoinRequest, GuildOA } from "../types";
 import { guildsSave } from "../index";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
+import { maxMembersInGuild } from "./createGuild";
 
 const sendMasterRequest = (
   masterUser: User,
@@ -139,7 +140,12 @@ const JoinGuildCommand: Command = {
         ).user;
         const requestUser = message.author;
 
-        if (!guild.members.includes(requestUser.tag)) {
+        if(guild.members.length === maxMembersInGuild){
+          embed
+            .setColor("RED")
+            .addField("Dommage !", `${guildName} a atteind la limite de ${maxMembersInGuild} membres`);
+        }
+        else if (!guild.members.includes(requestUser.tag)) {
           sendMasterRequest(
             masterUser,
             requestUser,
