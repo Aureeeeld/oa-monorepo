@@ -5,7 +5,7 @@ import { guildsSave } from "../index";
 const ShowGuildCommand: Command = {
   aliases: ["sg"],
   description: "Permet d'afficher la listes des guildes'",
-  name: "show_guild",
+  name: "showGuild",
   onlyStaff: false,
   usage: "",
   run: (message: Message) => {
