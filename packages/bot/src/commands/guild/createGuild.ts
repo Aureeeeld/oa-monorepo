@@ -19,8 +19,8 @@ import { Command, GuildOA, GuildInArray, GuildJoinRequest } from "../types";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
 import { guildsSave } from "../index";
 
-export const maxMembersInGuild:Number = 12;
-export const minMembersInGuildToAdd:Number = 2;
+export const maxMembersInGuild:Number = 11;
+export const minMembersInGuild:Number = 2;
 
 // const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
@@ -168,13 +168,13 @@ const checkGuildValidation = async (server: Guild, guild: GuildOA, master: Guild
 
     if (guild.valid === null && (
       guildsSave.some((guildInArray: GuildInArray) => guildInArray.guild.members.some(memberTag => guild.members.includes(memberTag) && guild.name !== guildInArray.guild.name))
-      || (guild.applicantsList.length - guild.applicantsList.filter(x => x.response === false).length) < minMembersInGuildToAdd)) {
+      || (guild.applicantsList.length - guild.applicantsList.filter(x => x.response === false).length) < minMembersInGuild)) {
       guild.valid = false;
 
       const embed = new RichEmbed()
         .setColor("RED")
         .setTitle("Echec de la création de la guilde")
-        .addField("Problème de membres", `Un ou plusieurs membre.s a.ont refusé ou rejoind une guilde entre temps, il y a moins de ${minMembersInGuildToAdd} personnes recrutable :/\n
+        .addField("Problème de membres", `Un ou plusieurs membre.s a.ont refusé ou rejoind une guilde entre temps, il y a moins de ${minMembersInGuild} personnes recrutable :/\n
          la création de guilde ${guild.name} est annulée`);
 
       server.members.filterArray(
@@ -195,7 +195,7 @@ const checkGuildValidation = async (server: Guild, guild: GuildOA, master: Guild
 
     } else if (
       guild.validatedByStaff &&
-      guild.applicantsList.filter(x => x.response).length >= minMembersInGuildToAdd &&
+      guild.applicantsList.filter(x => x.response).length >= minMembersInGuild &&
       guild.valid === null
     ) {
       guild.valid = true;
@@ -346,7 +346,7 @@ const getStaffConfirmation = (msg: Message, guild: GuildOA) => {
         msg.channel.send(new RichEmbed()
           .setTitle(`Echec création de la guilde ${guild.name}`)
           .setColor("RED")
-          .addField("Pourquoi ?", `Un ou plusieurs membre.s a.ont refusé ou rejoind une guilde entre temps, il y a moins de ${minMembersInGuildToAdd} personnes recrutable :/\n
+          .addField("Pourquoi ?", `Un ou plusieurs membre.s a.ont refusé ou rejoind une guilde entre temps, il y a moins de ${minMembersInGuild} personnes recrutable :/\n
          la création de guilde ${guild.name} est annulée`))
       }else{
         const awnser = collected.first().emoji.name;
@@ -441,7 +441,7 @@ const CreateGuildCommand: Command = {
       params[0] = params[0].trim();
       params = params[0].split(" ");
 
-      if (!params.length || message.mentions.users.size < minMembersInGuildToAdd) {
+      if (!params.length || message.mentions.users.size < minMembersInGuild) {
         embed
           .setColor("RED")
           .addField(
@@ -457,7 +457,7 @@ const CreateGuildCommand: Command = {
       //       "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
       //     );
       // }
-      else if (message.mentions.users.size < minMembersInGuildToAdd) {
+      else if (message.mentions.users.size < minMembersInGuild) {
         embed
           .setColor("RED")
           .addField(
