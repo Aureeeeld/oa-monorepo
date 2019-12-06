@@ -19,8 +19,8 @@ import { Command, GuildOA, GuildInArray, GuildJoinRequest } from "../types";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
 import { guildsSave } from "../index";
 
-export const maxMembersInGuild:Number = 11;
-export const minMembersInGuild:Number = 2;
+export const maxMembersInGuild:Number = 12;
+export const minMembersInGuild:Number = 3;
 
 // const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
@@ -441,7 +441,7 @@ const CreateGuildCommand: Command = {
       params[0] = params[0].trim();
       params = params[0].split(" ");
 
-      if (!params.length || message.mentions.users.size < minMembersInGuild) {
+      if (!params.length || (message.mentions.users.size - 1) < minMembersInGuild) {
         embed
           .setColor("RED")
           .addField(
