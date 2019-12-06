@@ -19,8 +19,8 @@ import { Command, GuildOA, GuildInArray, GuildJoinRequest } from "../types";
 import { saveGuildFile, UnicodeReactMap } from "../../utils/commandUtils";
 import { guildsSave } from "../index";
 
-export const maxMembersInGuild:Number = 12;
-export const minMembersInGuild:Number = 3;
+export const maxMembersInGuild:number = 12;
+export const minMembersInGuild:number = 3;
 
 // const minSeniority: number = moment().diff(moment().subtract("1", "d"));
 const roleShouldCheckGuild = "Staff";
@@ -441,7 +441,7 @@ const CreateGuildCommand: Command = {
       params[0] = params[0].trim();
       params = params[0].split(" ");
 
-      if (!params.length || message.mentions.users.size < (minMembersInGuild -1)) {
+      if (!params.length || (message.mentions.users.size < (minMembersInGuild- 1) )) {
         embed
           .setColor("RED")
           .addField(
@@ -457,7 +457,7 @@ const CreateGuildCommand: Command = {
       //       "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
       //     );
       // }
-      else if (message.mentions.users.size < (minMembersInGuild - 1)) {
+      else if (message.mentions.users.size < (+minMembersInGuild - 1)) {
         embed
           .setColor("RED")
           .addField(
