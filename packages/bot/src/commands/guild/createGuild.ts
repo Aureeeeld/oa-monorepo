@@ -441,7 +441,7 @@ const CreateGuildCommand: Command = {
       params[0] = params[0].trim();
       params = params[0].split(" ");
 
-      if (!params.length || (message.mentions.users.size - 1) < minMembersInGuild) {
+      if (!params.length || message.mentions.users.size < (minMembersInGuild -1)) {
         embed
           .setColor("RED")
           .addField(
