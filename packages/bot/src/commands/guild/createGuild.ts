@@ -457,7 +457,7 @@ const CreateGuildCommand: Command = {
       //       "Prennez le temps de découvrir petit monde avant de créer le votre <:mccree:453138086919143424>"
       //     );
       // }
-      else if (message.mentions.users.size < minMembersInGuild) {
+      else if (message.mentions.users.size < (minMembersInGuild - 1)) {
         embed
           .setColor("RED")
           .addField(
