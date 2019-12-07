@@ -70,5 +70,96 @@
     "name": "Pimouss",
     "valid": true,
     "validatedByStaff": true
+  },
+  {
+    "applicantsList": [
+      {
+        "applicant": "Rasboule#1810",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "Kaou#4019",
+    "members": [
+      "Kaou#4019",
+      "KoNo JYoW dA#0614",
+      "Rasboule#1810",
+      "Sandou :hibiscus:#7920",
+      "V3ktore#8229",
+      "MrPorcXelor! :pig:#4176"
+    ],
+    "money": 0,
+    "name": "Junkers Dynasty",
+    "valid": true,
+    "validatedByStaff": true
+  },
+  {
+    "applicantsList": [
+      {
+        "applicant": "Rasboule#1810",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "Graine#0117",
+    "members": [
+      "Graine#0117",
+      "Dk#2681",
+      "LsD595#7364",
+      "Norta#6258",
+      "Skyno#6982",
+      "Ayxela :rose:#1724",
+      "Pendragon-Ban#0007",
+      "SoYuun' :rose:#0412"
+    ],
+    "money": 0,
+    "name": "Les Exilés",
+    "valid": true,
+    "validatedByStaff": true
+  },
+  {
+    "applicantsList": [
+      {
+        "applicant": "Rasboule#1810",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "Kojou#2256",
+    "members": [
+      "Kojou#2256",
+      "ArseniKX-#1392",
+      "Belange#6300",
+      "Blakayate#9364",
+      "Derkow#0915",
+      "Lolitalilou#5134"
+    ],
+    "money": 0,
+    "name": "MEKA",
+    "valid": true,
+    "validatedByStaff": true
+  },
+  {
+    "applicantsList": [
+      {
+        "applicant": "Rasboule#1810",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "cervin666#3306",
+    "members": [
+      "cervin666#3306",
+      "pol44r#9589",
+      "Tayaress#6967"
+    ],
+    "money": 0,
+    "name": "Flex Trick Poney",
+    "valid": true,
+    "validatedByStaff": true
   }
 ]
