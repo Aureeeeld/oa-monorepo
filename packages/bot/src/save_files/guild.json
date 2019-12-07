@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "applicantsList": [
+      {
+        "applicant": "filosofeTHElama#6096",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "Rinji'#9797",
+    "members": [
+      "Rinji'#9797",
+      "filosofeTHElama#6096",
+      "ShaTon !#7313",
+      "귀여운 샤#9193",
+      "Tintin Prod#1325",
+      "Crew Stillant#1182",
+      "Saloc11inXP#7502",
+      "Lcrakito#9019",
+      "SeeZQW#5686",
+      "{Hydra} Aureeeeld#2622"
+    ],
+    "money": 0,
+    "name": "Greedy Kittens",
+    "valid": true,
+    "validatedByStaff": true
+  }
+]

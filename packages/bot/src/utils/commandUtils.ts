@@ -36,13 +36,14 @@ const importCommand = (command: Command) => {
 
     commandsArray.push(commandInArray);
   });
-
   const commandInArray: CommandInArray = {
     alias: command.name,
     command
   };
 
   commandsArray.push(commandInArray);
+  console.log(commandsArray);
+
 };
 
 const importCommandFromFile = (file: string) => {
@@ -52,15 +53,18 @@ const importCommandFromFile = (file: string) => {
       if (isCommand(def)) importCommand(def);
     }
   });
+
 };
 
 const initCommandsArray = () => {
+  console.log(commandsArray);
   recursive(
     pathToCommands,
     async (err: NodeJS.ErrnoException | null, files: string[]) => {
       files.forEach(file => importCommandFromFile(file));
     }
   );
+
 };
 
 const initGuildSaveFile = () => {
@@ -88,6 +92,7 @@ export const saveGuildFile = () => {
 export const init = () => {
   initGuildSaveFile();
   initCommandsArray();
+
 };
 
 export const UnicodeReactMap = {
