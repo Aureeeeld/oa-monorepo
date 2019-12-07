@@ -25,5 +25,50 @@
     "name": "Greedy Kittens",
     "valid": true,
     "validatedByStaff": true
+  },
+  {
+    "applicantsList": [
+      {
+        "applicant": "Saucisse Sauvage#3224",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "Millyn | Aka Narcisse ❦#0155",
+    "members": [
+      "Millyn | Aka Narcisse ❦#0155",
+      "Livanna#0504",
+      "Katsu'#0072",
+      "Stromineur#2324",
+      "Saucisse Sauvage#3224",
+      "VΛNNΛ₭I#9322",
+      "Splinter#3820"
+    ],
+    "money": 0,
+    "name": "Innocence",
+    "valid": true,
+    "validatedByStaff": true
+  },
+  {
+    "applicantsList": [
+      {
+        "applicant": "E̜̓s̛̹̃p͙͌́y̳ͫ͝#2559",
+        "limitDate": "2019-12-10T11:03:52.949Z",
+        "response": true,
+        "responseDate": "2019-12-07T11:04:08.469Z"
+      }
+    ],
+    "master": "Saiiga#2546",
+    "members": [
+      "Saiiga#2546",
+      "E̜̓s̛̹̃p͙͌́y̳ͫ͝#2559",
+      "AirbagDELUXE#4920",
+      "Laggy#7101"
+    ],
+    "money": 0,
+    "name": "Pimouss",
+    "valid": true,
+    "validatedByStaff": true
   }
 ]
