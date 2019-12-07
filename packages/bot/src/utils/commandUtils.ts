@@ -42,7 +42,6 @@ const importCommand = (command: Command) => {
   };
 
   commandsArray.push(commandInArray);
-  console.log(commandsArray);
 
 };
 
@@ -57,7 +56,6 @@ const importCommandFromFile = (file: string) => {
 };
 
 const initCommandsArray = () => {
-  console.log(commandsArray);
   recursive(
     pathToCommands,
     async (err: NodeJS.ErrnoException | null, files: string[]) => {
